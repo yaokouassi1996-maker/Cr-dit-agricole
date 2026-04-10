@@ -9,51 +9,70 @@
             --cam-green: #008751; 
             --cam-red: #ed1c24; 
             --bg-gray: #f4f7f6;
+            --text-dark: #2d3748;
         }
         
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-gray); margin: 0; color: #2d3748; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-gray); margin: 0; color: var(--text-dark); }
         .hidden { display: none !important; }
         
+        /* HEADER RESPONSIVE */
         header { 
             background: #fff; border-bottom: 4px solid var(--cam-green); 
-            padding: 10px 5%; display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .logo-container { display: flex; align-items: center; gap: 10px; }
-        .logo-text h1 { margin: 0; font-size: 1.2em; color: #444; text-transform: uppercase; }
-        .logo-text p { margin: 0; font-size: 0.7em; color: var(--cam-green); font-weight: bold; letter-spacing: 2px; }
-        .red-bar { width: 40px; height: 6px; background: var(--cam-red); margin-top: 5px; }
+        .logo-text h1 { margin: 0; font-size: 1em; color: #444; text-transform: uppercase; }
+        .logo-text p { margin: 0; font-size: 0.65em; color: var(--cam-green); font-weight: bold; }
 
-        .login-container { max-width: 400px; margin: 80px auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+        /* LOGIN SECTION */
+        .login-container { width: 90%; max-width: 400px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
         .input-group { margin-bottom: 20px; text-align: left; }
         .input-group label { display: block; margin-bottom: 8px; font-size: 0.85em; font-weight: 600; }
-        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; /* Évite le zoom auto sur iPhone */ }
         
-        button { 
-            width: 100%; padding: 15px; background: #004a99; color: white; border: none; border-radius: 6px; 
-            cursor: pointer; font-weight: bold; transition: 0.3s;
-        }
-        button:hover { background: #003366; }
+        button { width: 100%; padding: 15px; background: #004a99; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
 
-        .dashboard-wrapper { display: flex; max-width: 1200px; margin: 30px auto; gap: 20px; padding: 0 20px; }
-        .sidebar { width: 250px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); height: fit-content; overflow: hidden; }
+        /* LAYOUT RESPONSIVE */
+        .dashboard-wrapper { 
+            display: flex; flex-direction: row; /* Horizontal par défaut (PC) */
+            max-width: 1200px; margin: 20px auto; gap: 20px; padding: 0 15px; 
+        }
+
+        .sidebar { width: 250px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); height: fit-content; }
         .sidebar ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar li a { display: block; padding: 15px 20px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; transition: 0.2s; }
-        .sidebar li a:hover { background: #f8f9fa; color: var(--cam-green); padding-left: 25px; }
+        .sidebar li a { display: block; padding: 15px 20px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
 
-        .dashboard-content { flex: 1; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .dashboard-content { flex: 1; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+
+        /* INFO BAR & BADGE */
+        .info-bar { display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 20px; }
+        .timestamp-badge { font-size: 0.75em; background: #edf2f7; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e0; text-align: right; min-width: 140px; }
+
+        .blocage-alert { background: #fff5f5; color: var(--cam-red); padding: 15px; border: 1px solid #feb2b2; border-radius: 6px; margin-bottom: 20px; font-size: 0.9em; }
         
-        .info-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; }
-        .timestamp-badge { 
-            font-size: 0.75em; color: #4a5568; background: #edf2f7; padding: 10px 15px; border-radius: 6px; border: 1px solid #cbd5e0; 
-            line-height: 1.4; text-align: right;
+        .solde-box { display: flex; justify-content: space-between; align-items: center; background: #f0fdf4; padding: 20px; border-radius: 8px; border-left: 6px solid var(--cam-green); }
+        .amount { font-size: 1.8em; font-weight: bold; }
+
+        /* 📱 MOBILE & TABLETTE ADAPTATION */
+        @media (max-width: 768px) {
+            .dashboard-wrapper { flex-direction: column; } /* On empile Sidebar et Contenu */
+            .sidebar { width: 100%; }
+            .sidebar ul { display: flex; flex-wrap: wrap; }
+            .sidebar li { flex: 1 1 50%; } /* Deux éléments par ligne sur mobile */
+            .sidebar li a { font-size: 0.8em; text-align: center; padding: 10px; }
+
+            .info-bar { flex-direction: column; gap: 15px; }
+            .timestamp-badge { text-align: left; width: fit-content; }
+            
+            .amount { font-size: 1.5em; }
+            header { justify-content: center; text-align: center; gap: 10px; }
         }
 
-        .blocage-alert { background: #fff5f5; color: var(--cam-red); padding: 20px; border: 1px solid #feb2b2; margin-bottom: 25px; border-radius: 6px; }
-        .solde-box { display: flex; justify-content: space-between; background: #f0fdf4; padding: 25px; border-radius: 8px; border-left: 6px solid var(--cam-green); }
-        .amount { font-size: 2.2em; font-weight: bold; }
-        .error { color: var(--cam-red); font-size: 0.85em; margin-bottom: 15px; font-weight: bold; }
+        @media (max-width: 480px) {
+            .sidebar li { flex: 1 1 100%; } /* Une seule ligne par menu sur très petit écran */
+            .solde-box { flex-direction: column; text-align: center; gap: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -62,12 +81,11 @@
         <div class="logo-container">
             <div class="logo-text">
                 <h1>CREDIT AGRICOLE DU MAROC</h1>
-                <div class="red-bar"></div>
                 <p>UN ENGAGEMENT DURABLE</p>
             </div>
         </div>
         <div id="headerLogout" class="hidden">
-            <button onclick="logout()" style="width:auto; padding:8px 20px; background:var(--cam-green);">Déconnexion</button>
+            <button onclick="logout()" style="width:auto; padding:8px 15px; background:var(--cam-green); font-size: 0.8em;">Déconnexion</button>
         </div>
     </header>
 
@@ -77,13 +95,13 @@
             <form onsubmit="handleLogin(event)">
                 <div class="input-group">
                     <label>Identifiant personnel</label>
-                    <input type="text" id="accountId" placeholder="Entrez votre ID" required>
+                    <input type="text" id="accountId" placeholder="Votre ID" required>
                 </div>
                 <div class="input-group">
                     <label>Code secret</label>
                     <input type="password" id="password" placeholder="••••••••" required>
                 </div>
-                <div id="errorMessage" class="error"></div>
+                <div id="errorMessage" style="color:red; font-size:0.8em; margin-bottom:10px;"></div>
                 <button type="submit">SE CONNECTER</button>
             </form>
         </div>
@@ -91,38 +109,38 @@
         <div id="dashboardSection" class="dashboard-wrapper hidden">
             <nav class="sidebar">
                 <ul>
-                    <li><a href="index.html" style="font-weight:bold; color:var(--cam-green); background: #f0fdf4;">SYNTHÈSE DU COMPTE</a></li>
+                    <li><a href="index.html" style="font-weight:bold; color:var(--cam-green); background:#f0fdf4;">SYNTHÈSE</a></li>
                     <li><a href="mes-cartes.html">MES CARTES</a></li>
-                    <li><a href="mes-assurances.html">MES ASSURANCES</a></li>
-                    <li><a href="#" style="color:#ccc; cursor:not-allowed;">VIREMENTS 🔒</a></li>
+                    <li><a href="mes-assurances.html">ASSURANCES</a></li>
+                    <li><a href="#" style="color:#ccc;">VIREMENTS 🔒</a></li>
                 </ul>
             </nav>
 
             <div class="dashboard-content">
                 <div class="info-bar">
                     <div>
-                        <h2 style="margin:0;">Bonjour,</h2>
-                        <h3 style="margin:5px 0; color:#444;">Mme GUEGANIC ép.ASCHAUER Daniele Gabrielle Andrée</h3>
-                        <p style="color:#718096; font-size:0.9em;">Compte Chèques n° 2544 8796 0084 2000</p>
+                        <h3 style="margin:0; font-size: 1.1em;">Bonjour,</h3>
+                        <p style="margin:5px 0; font-weight: bold; color:#444;">Mme GUEGANIC ép.ASCHAUER Daniele Gabrielle Andrée</p>
+                        <p style="color:#718096; font-size:0.8em; margin:0;">Compte Chèques n° 2544...2000</p>
                     </div>
                     <div class="timestamp-badge">
                         <strong>Dernière connexion :</strong><br>
-                        <span id="connectionDisplay">Calcul en cours...</span>
+                        <span id="connectionDisplay">Chargement...</span>
                     </div>
                 </div>
 
                 <div class="blocage-alert">
-                    <h3 style="margin-top:0;">⚠️ RESTRICTION ADMINISTRATIVE</h3>
-                    <p>En raison d'une procédure de vérification de conformité, l'accès aux fonds est temporairement suspendu. Les fonctions de virement sont désactivées.</p>
+                    <strong>⚠️ RESTRICTION ADMINISTRATIVE</strong><br>
+                    Accès aux fonds suspendu pour vérification.
                 </div>
 
                 <div class="solde-box">
                     <div>
-                        <span style="font-size:0.8em; text-transform:uppercase; color:#666;">Solde Actuel Bloqué</span><br>
+                        <span style="font-size:0.7em; text-transform:uppercase;">Solde Actuel Bloqué</span><br>
                         <span class="amount">15 260 000,00</span>
                     </div>
                     <div style="text-align:right;">
-                        <span style="font-size:0.8em; text-transform:uppercase; color:#666;">Devise</span><br>
+                        <span style="font-size:0.7em; text-transform:uppercase;">Devise</span><br>
                         <span style="font-weight:bold;">MAD</span>
                     </div>
                 </div>
@@ -131,36 +149,20 @@
     </main>
 
     <script>
-        // On vérifie au chargement si l'utilisateur est déjà loggé
-        window.addEventListener('load', function() {
-            if (localStorage.getItem('isLoggedIn') === 'true') {
-                showDashboard();
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('isLoggedIn') === 'true') { showDashboard(); }
         });
 
         function handleLogin(event) {
             event.preventDefault();
-            
-            // On utilise .trim() pour supprimer les espaces invisibles accidentels
             const id = document.getElementById('accountId').value.trim();
             const pass = document.getElementById('password').value.trim();
 
-            // VERIFICATION STRICTE
-            // Attention : "Andrée" contient un accent. Si vous tapez "Andree", ça ne marchera pas.
             if(id === "Gabrielle-Andrée008420" && pass === "Gabrielle-Andrée008420") {
-                
                 const maintenant = new Date();
-                const jour = String(maintenant.getDate()).padStart(2, '0');
-                const mois = String(maintenant.getMonth() + 1).padStart(2, '0');
-                const annee = maintenant.getFullYear();
-                const heures = String(maintenant.getHours()).padStart(2, '0');
-                const minutes = String(maintenant.getMinutes()).padStart(2, '0');
-
-                const fullTimestamp = "Le " + jour + "/" + mois + "/" + annee + " à " + heures + ":" + minutes;
-
+                const fullTimestamp = "Le " + maintenant.toLocaleDateString('fr-FR') + " à " + maintenant.getHours().toString().padStart(2, '0') + ":" + maintenant.getMinutes().toString().padStart(2, '0');
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('loginTime', fullTimestamp);
-                
                 showDashboard();
             } else {
                 document.getElementById('errorMessage').innerText = "Identifiant ou mot de passe incorrect.";
@@ -171,13 +173,8 @@
             document.getElementById('loginSection').classList.add('hidden');
             document.getElementById('dashboardSection').classList.remove('hidden');
             document.getElementById('headerLogout').classList.remove('hidden');
-            
-            const timeSpan = document.getElementById('connectionDisplay');
             const savedTime = localStorage.getItem('loginTime');
-            
-            if (savedTime && timeSpan) {
-                timeSpan.innerText = savedTime;
-            }
+            if (savedTime) document.getElementById('connectionDisplay').innerText = savedTime;
         }
 
         function logout() {
